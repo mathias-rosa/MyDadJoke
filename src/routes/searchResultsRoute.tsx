@@ -2,12 +2,14 @@ import { useEffect, useState } from "react";
 
 import SearchResult from "../pages/SearchResult";
 import { useInfiniteQuery } from "@tanstack/react-query";
-import { Button } from "@mui/material";
+import { Button, Skeleton } from "@mui/material";
 import { JokeResponse } from "../types/api";
 import { Header } from "../layouts/Header";
 
+
 export default function SearchResultRoute() {
-  const defaultSearch = new URLSearchParams(window.location.search).get("term") ?? "";
+  const defaultSearch =
+    new URLSearchParams(window.location.search).get("term") ?? "";
   const [search, setSearch] = useState(defaultSearch);
 
   useEffect(() => {
@@ -35,8 +37,15 @@ export default function SearchResultRoute() {
       return response.json();
     },
     initialPageParam: 1,
-    getPreviousPageParam: (firstPage) => (firstPage.previous_page && firstPage.previous_page !== firstPage.current_page) ? firstPage.previous_page : undefined,
-    getNextPageParam: (lastPage) => (lastPage.next_page && lastPage.next_page !== lastPage.current_page) ? lastPage.next_page : undefined,
+    getPreviousPageParam: (firstPage) =>
+      firstPage.previous_page &&
+      firstPage.previous_page !== firstPage.current_page
+        ? firstPage.previous_page
+        : undefined,
+    getNextPageParam: (lastPage) =>
+      lastPage.next_page && lastPage.next_page !== lastPage.current_page
+        ? lastPage.next_page
+        : undefined,
   });
 
   const jokes = query.data?.pages.map(
@@ -45,21 +54,40 @@ export default function SearchResultRoute() {
 
   function searchResults() {
     if (query.isLoading) {
-      return <div>Loading...</div>;
+      return (
+        <div
+          style={{
+            display: "flex",
+            flexDirection: "column",
+            gap: 10,
+            width: "100%",
+          }}
+        >
+          {Array.from({ length: 2 }).map((_, index) => (
+            <Skeleton key={index} variant="rectangular" height={60} />
+          ))}
+          {Array.from({ length: 3 }).map((_, index) => (
+            <Skeleton key={index} variant="text" height={60} />
+          ))}
+          {Array.from({ length: 1}).map((_, index) => (
+            <Skeleton key={index} variant="rectangular" height={60} />
+          ))}
+        </div>
+      );
     }
 
     if (query.isError) {
       return <div>Error: {query.error.message}</div>;
     }
 
-    if (query.isSuccess) {
+    if (query.isSuccess && jokes[0].length > 0) {
       return (
         <div style={{ display: "flex", flexDirection: "column", gap: 10 }}>
           <SearchResult jokes={jokes} />
           <Button
             variant="outlined"
             onClick={() => {
-              query.fetchNextPage()
+              query.fetchNextPage();
             }}
             disabled={!query.hasNextPage || query.isFetchingNextPage}
           >
@@ -69,12 +97,19 @@ export default function SearchResultRoute() {
       );
     }
 
-    return <div>Search for a joke!</div>;
+    return <div style={{
+      width: "100%",
+      textAlign: "center",
+    }}>No jokes found :(</div>;
   }
 
   return (
     <>
-      <Header isLoading={query.isLoading} setSearch={handleSearch} search={search} />
+      <Header
+        isLoading={query.isLoading}
+        setSearch={handleSearch}
+        search={search}
+      />
       <div
         style={{
           padding: "1.5em",

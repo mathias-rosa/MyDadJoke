@@ -8,7 +8,7 @@ export function Header({ isLoading , search, setSearch } : { isLoading: boolean,
 
     function handleSearch(text : string) {
         setSearch(text);
-        navigate(`/search?term=${text}`);
+        navigate(`/search?term=${encodeURIComponent(text)}`);
     }
     return (
     <AppBar>
