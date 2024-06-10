@@ -1,6 +1,6 @@
 import StyledSearchBar from "../components/StyledSearchBar";
 import React, { useState } from "react";
-import { Button } from "@mui/material";
+import { Button, useTheme } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 
 
@@ -8,6 +8,8 @@ export default function Index() {
 
     const [search, setSearch] = useState("");
     const navigate = useNavigate();
+
+    const theme = useTheme();
 
     function handleSearchInput(e: React.ChangeEvent<HTMLInputElement>) {
       setSearch(e.target.value);
@@ -35,7 +37,7 @@ export default function Index() {
             width: "100%",
             maxWidth: "200px",
             margin: "0 auto",
-          }} src="/my_dad_joke.png" alt="Joke" />
+          }} src={`/my_dad_joke${theme.palette.mode === 'dark' ? '_dark' : ''}.png`} alt="Joke" />
         <div
         style={{
           display: "flex",
