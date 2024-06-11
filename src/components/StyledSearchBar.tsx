@@ -27,7 +27,7 @@ export default function StyledSearchBar({isLoading=false, placeholder="Search", 
           return (
           <TextField 
             placeholder={placeholder}
-            label="" 
+            label=""
             InputProps={{
               startAdornment : (
                 <InputAdornment position="start">

@@ -11,13 +11,12 @@ export default function Index() {
 
     const theme = useTheme();
 
-    function handleSearchInput(e: React.ChangeEvent<HTMLInputElement>) {
-      setSearch(e.target.value);
+    function handleSearchInput(text : string) {
+      setSearch(text);
       }
       
       function handleSubmit() {
         navigate(`/search?term=${search}`);
-      console.log(search);
       }
 
     return (
@@ -49,7 +48,7 @@ export default function Index() {
       >
 
           <StyledSearchBar
-            onChange={handleSearchInput}
+            onInputChange={(_, value) => handleSearchInput(value)}
             onKeyPress={
                 (e) => {
                     if (e.key === "Enter") {
