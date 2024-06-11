@@ -25,10 +25,9 @@ export function Header({ isLoading , search, setSearch } : { isLoading: boolean,
           />
         </Link>
             <StyledSearchBar
-            onChange={(e) => handleSearch(e.target.value)}
+            onInputChange={(_, value) => handleSearch(value)}
             isLoading={isLoading}
             placeholder="Search for a joke"
-            name='term'
             value={search}
             />
         </AppBar>
