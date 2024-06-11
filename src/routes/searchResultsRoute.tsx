@@ -6,9 +6,8 @@ import Button from "@mui/material/Button";
 import Skeleton from "@mui/material/Skeleton";
 import { JokeResponse } from "../types/api";
 import { Header } from "../layouts/Header";
-import styled from "styled-components";
 import Stack from "@mui/material/Stack";
-
+import Box from "@mui/material/Box";
 
 export default function SearchResultRoute() {
   const defaultSearch =
@@ -58,7 +57,7 @@ export default function SearchResultRoute() {
           {Array.from({ length: 3 }).map((_, index) => (
             <Skeleton key={index} variant="text" height={60} />
           ))}
-          {Array.from({ length: 1}).map((_, index) => (
+          {Array.from({ length: 1 }).map((_, index) => (
             <Skeleton key={index} variant="rectangular" height={60} />
           ))}
         </Stack>
@@ -66,7 +65,7 @@ export default function SearchResultRoute() {
     }
 
     if (query.isError) {
-      return <div>Error: {query.error.message}</div>;
+      return <Box>Error: {query.error.message}</Box>;
     }
 
     if (query.isSuccess && jokes[0].length > 0) {
@@ -86,12 +85,7 @@ export default function SearchResultRoute() {
       );
     }
 
-    const NoJokes = styled.div`
-      width: 100%;
-      text-align: center;
-    `;
-
-    return <NoJokes>No jokes found :(</NoJokes>;
+    return <Stack sx={{ textAlign: "center" }}>No jokes found :(</Stack>;
   }
 
   return (
@@ -101,15 +95,15 @@ export default function SearchResultRoute() {
         setSearch={handleSearch}
         search={search}
       />
-      <div
-        style={{
+      <Box
+        sx={{
           padding: "1.5em",
           flex: 1,
           overflowY: "auto",
         }}
       >
         {searchResults()}
-      </div>
+      </Box>
     </>
   );
 }

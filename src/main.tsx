@@ -7,6 +7,7 @@ import { QueryClientProvider, QueryClient } from "@tanstack/react-query";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import SearchResultRoute from "./routes/searchResultsRoute";
 import Index from "./pages/Index";
+import Box from "@mui/material/Box";
 
 document.title = "My Dad Joke";
 
@@ -14,7 +15,7 @@ const router = createBrowserRouter([
   {
     path: "/",
     element: <Root />,
-    errorElement: <div>404 Not Found</div>,
+    errorElement: <Box>404 Not Found</Box>,
     children: [
       { index: true, element: <Index /> },
       {

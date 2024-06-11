@@ -1,19 +1,7 @@
-import styled from "styled-components";
 import { Outlet } from "react-router-dom";
-import { useMediaQuery } from "@mui/material";
+import { Box, useMediaQuery } from "@mui/material";
 import { createTheme, ThemeProvider } from "@mui/material";
 import { useMemo } from "react";
-
-
-const StyledRoot = styled.div`
-  display: flex;
-  flex-direction: column;
-  height: 100vh;
-  width: 100vw;
-  box-sizing: border-box;
-  overflow-y: auto;
-`;
-
 
 const themeColors = {
   primary: {
@@ -97,9 +85,18 @@ export default function Root() {
   return (
     <ThemeProvider theme={theme}>
 
-    <StyledRoot>
+    <Box
+      sx={{
+        display: 'flex',
+        flexDirection: 'column',
+        height: '100vh',
+        width: '100vw',
+        boxSizing: 'border-box',
+        overflowY: 'auto',
+      }}
+    >
         <Outlet />
-    </StyledRoot>
+    </Box>
     </ThemeProvider>
 
   );
