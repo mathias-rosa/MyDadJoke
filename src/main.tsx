@@ -8,6 +8,7 @@ import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import SearchResultRoute from "./routes/searchResultsRoute";
 import Index from "./pages/Index";
 
+document.title = "My Dad Joke";
 
 const router = createBrowserRouter([
   {

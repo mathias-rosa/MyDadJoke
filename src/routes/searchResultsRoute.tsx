@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
 import SearchResult from "../pages/SearchResult";
 import { useInfiniteQuery } from "@tanstack/react-query";
@@ -14,13 +14,6 @@ export default function SearchResultRoute() {
   const defaultSearch =
     new URLSearchParams(window.location.search).get("term") ?? "";
   const [search, setSearch] = useState(defaultSearch);
-
-  useEffect(() => {
-    if (search) {
-      document.title = `Search Results - ${search}`;
-    }
-    document.title = "Search Results";
-  }, [search]);
 
   function handleSearch(text: string) {
     setSearch(text);

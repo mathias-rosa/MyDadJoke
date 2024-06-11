@@ -67,7 +67,15 @@ export default function Root() {
               },
             },
           },
-          MuiTextField: {
+          MuiOutlinedInput: {
+            styleOverrides: {
+              root: {
+                borderRadius: 10,
+                borderColor: "blue",
+              },
+            },
+          },
+          MuiButton: {
             styleOverrides: {
               root: {
                 borderRadius: 10,
