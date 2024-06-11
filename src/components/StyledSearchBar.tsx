@@ -13,13 +13,13 @@ type StyledSearchBarProps = {
   options?: string[];
 } & LightweightAutoCompleteProps;
 
-export default function StyledSearchBar({isLoading=false, placeholder="Search", ...rest} : StyledSearchBarProps) {
+export default function StyledSearchBar({isLoading=false, placeholder="Search", ...props} : StyledSearchBarProps) {
   return (
     <>
       <Autocomplete
         id="free-solo-demo"
         freeSolo
-        options={[]}
+        options={props.options || ["Dad"]}
         fullWidth
         renderInput={(params) => {
           // eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -38,11 +38,11 @@ export default function StyledSearchBar({isLoading=false, placeholder="Search", 
             {...otherParams} 
           />
       )}}
-        {...rest}
+        {...props}
       />
 
       {/* <TextField
-        {...rest}
+        {...props}
         id="outlined-basic"
         placeholder={placeholder}
         variant="outlined"
