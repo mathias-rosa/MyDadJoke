@@ -1,89 +1,9 @@
 import { Outlet } from "react-router-dom";
-import { Box, useMediaQuery } from "@mui/material";
-import { createTheme, ThemeProvider } from "@mui/material";
-import { useMemo } from "react";
+import Box from "@mui/material/Box";
 
-const themeColors = {
-  primary: {
-    main: "#ffc300",
-  },
-  secondary: {
-    main: "#000000",
-  },
-  surface: {
-    main: "#ffffff",
-    dark: "#242424",
-  },
-};
-
-
-export default function Root() { 
-  const prefersDarkMode = useMediaQuery('(prefers-color-scheme: dark)');
-
-  const theme = useMemo(
-    () =>
-      createTheme({
-        palette: {
-          mode: prefersDarkMode ? 'dark' : 'light',
-          primary: themeColors.primary,
-          secondary: themeColors.secondary,
-        },
-        components: {
-          MuiPaper: {
-            styleOverrides: {
-              root: {
-                padding: "1.25em",
-                borderRadius: 10,
-              },
-            },
-            defaultProps: {
-              variant: "outlined",
-            },
-          },
-          MuiAppBar: {
-            styleOverrides: {
-              root: {
-                display: "flex",
-                flexDirection: "row",
-                padding: "1.5em",
-                gap: "2rem",
-                alignItems: "center",
-                justifyContent: "center",
-                borderRadius: 0,
-                position: "static",
-                backgroundColor: prefersDarkMode ? themeColors.surface.dark : themeColors.surface.main,
-              },
-            },
-          },
-          MuiOutlinedInput: {
-            styleOverrides: {
-              root: {
-                borderRadius: 10,
-                borderColor: "blue",
-              },
-            },
-          },
-          MuiButton: {
-            styleOverrides: {
-              root: {
-                borderRadius: 10,
-              },
-            },
-          },
-          MuiStack: {
-            styleOverrides: {
-              root: {
-                gap: "1rem",
-              },
-            },
-          },
-        },
-      }),
-    [prefersDarkMode],
-  );
+export default function Root() {
 
   return (
-    <ThemeProvider theme={theme}>
 
     <Box
       sx={{
@@ -95,9 +15,8 @@ export default function Root() {
         overflowY: 'auto',
       }}
     >
-        <Outlet />
+      <Outlet />
     </Box>
-    </ThemeProvider>
 
   );
 }
