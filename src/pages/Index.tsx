@@ -1,6 +1,7 @@
 import StyledSearchBar from "../components/StyledSearchBar";
 import { useState } from "react";
-import { Button, useTheme } from "@mui/material";
+import { useTheme } from "@mui/material";
+import Button from "@mui/material/Button";
 import { useNavigate } from "react-router-dom";
 
 

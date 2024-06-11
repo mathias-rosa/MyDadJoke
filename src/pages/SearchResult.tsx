@@ -1,4 +1,4 @@
-import { Paper } from '@mui/material';
+import Paper from '@mui/material/Paper';
 import { type Joke } from '../types/api';
 
 export default function SearchResult({ jokes } : { jokes: Joke[][] }) {

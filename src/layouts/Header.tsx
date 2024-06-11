@@ -1,4 +1,5 @@
-import { AppBar, useTheme } from '@mui/material';
+import { useTheme } from '@mui/material';
+import AppBar from '@mui/material/AppBar';
 import StyledSearchBar from '../components/StyledSearchBar';
 import {  Link, useNavigate } from "react-router-dom";
 

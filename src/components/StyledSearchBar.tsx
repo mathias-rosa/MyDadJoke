@@ -2,7 +2,7 @@ import TextField from '@mui/material/TextField';
 import InputAdornment from '@mui/material/InputAdornment';
 import SearchIcon from '@mui/icons-material/Search';
 import Spiner from './Spiner';
-import { Autocomplete } from '@mui/material';
+import Autocomplete from '@mui/material/Autocomplete';
 
 type LightweightAutoCompleteProps = Omit<React.ComponentProps<typeof Autocomplete>, 'options' | 'renderInput'>;
 
@@ -17,13 +17,14 @@ export default function StyledSearchBar({isLoading=false, placeholder="Search", 
   return (
     <>
       <Autocomplete
-        id="free-solo-demo"
+        id="search-input"
         freeSolo
-        options={props.options || ["Dad"]}
+        options={props.options || []}
         fullWidth
         renderInput={(params) => {
-          // eslint-disable-next-line @typescript-eslint/no-unused-vars
           const { InputProps, ...otherParams } = params;
+          // eslint-disable-next-line @typescript-eslint/no-unused-vars
+          const { startAdornment, ...otherInputProps } = InputProps;
           return (
           <TextField 
             placeholder={placeholder}
@@ -34,6 +35,7 @@ export default function StyledSearchBar({isLoading=false, placeholder="Search", 
                   {isLoading ? <Spiner /> : <SearchIcon />}
                 </InputAdornment>
               ),
+              ...otherInputProps
               }}
             {...otherParams} 
           />

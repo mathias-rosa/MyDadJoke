@@ -2,7 +2,8 @@ import { useEffect, useState } from "react";
 
 import SearchResult from "../pages/SearchResult";
 import { useInfiniteQuery } from "@tanstack/react-query";
-import { Button, Skeleton } from "@mui/material";
+import Button from "@mui/material/Button";
+import Skeleton from "@mui/material/Skeleton";
 import { JokeResponse } from "../types/api";
 import { Header } from "../layouts/Header";
 
