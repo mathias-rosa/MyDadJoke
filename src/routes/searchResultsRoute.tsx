@@ -8,21 +8,24 @@ import { JokeResponse } from "../types/api";
 import { Header } from "../layouts/Header";
 import Stack from "@mui/material/Stack";
 import Box from "@mui/material/Box";
+import useDebounce from "../utils/useDebounce";
 
 export default function SearchResultRoute() {
   const defaultSearch =
     new URLSearchParams(window.location.search).get("term") ?? "";
   const [search, setSearch] = useState(defaultSearch);
+  const debouncedSearch = useDebounce(search, 500);
+
 
   function handleSearch(text: string) {
     setSearch(text);
   }
 
   const query = useInfiniteQuery({
-    queryKey: ["jokes", search],
+    queryKey: ["jokes", debouncedSearch],
     queryFn: async ({ pageParam }) => {
       const response = await fetch(
-        `https://icanhazdadjoke.com/search?term=${search}&page=${pageParam}`,
+        `https://icanhazdadjoke.com/search?term=${debouncedSearch}&page=${pageParam}`,
         {
           headers: {
             Accept: "application/json",
@@ -34,7 +37,7 @@ export default function SearchResultRoute() {
     initialPageParam: 1,
     getPreviousPageParam: (firstPage) =>
       firstPage.previous_page &&
-      firstPage.previous_page !== firstPage.current_page
+        firstPage.previous_page !== firstPage.current_page
         ? firstPage.previous_page
         : undefined,
     getNextPageParam: (lastPage) =>
