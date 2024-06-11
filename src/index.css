@@ -53,3 +53,15 @@ h1 {
     background-color: #f9f9f9;
   }
 }
+
+.App-logo {
+  width: 100%;
+  max-width: 200px;
+  margin: 0 auto;
+}
+
+.header-logo {
+  width: 100%;
+  max-width: 96px;
+  margin: 0 auto;
+}

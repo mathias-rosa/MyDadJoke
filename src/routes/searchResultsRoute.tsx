@@ -6,6 +6,8 @@ import Button from "@mui/material/Button";
 import Skeleton from "@mui/material/Skeleton";
 import { JokeResponse } from "../types/api";
 import { Header } from "../layouts/Header";
+import styled from "styled-components";
+import Stack from "@mui/material/Stack";
 
 
 export default function SearchResultRoute() {
@@ -56,14 +58,7 @@ export default function SearchResultRoute() {
   function searchResults() {
     if (query.isLoading) {
       return (
-        <div
-          style={{
-            display: "flex",
-            flexDirection: "column",
-            gap: 10,
-            width: "100%",
-          }}
-        >
+        <Stack>
           {Array.from({ length: 2 }).map((_, index) => (
             <Skeleton key={index} variant="rectangular" height={60} />
           ))}
@@ -73,7 +68,7 @@ export default function SearchResultRoute() {
           {Array.from({ length: 1}).map((_, index) => (
             <Skeleton key={index} variant="rectangular" height={60} />
           ))}
-        </div>
+        </Stack>
       );
     }
 
@@ -83,7 +78,7 @@ export default function SearchResultRoute() {
 
     if (query.isSuccess && jokes[0].length > 0) {
       return (
-        <div style={{ display: "flex", flexDirection: "column", gap: 10 }}>
+        <Stack>
           <SearchResult jokes={jokes} />
           <Button
             variant="outlined"
@@ -94,14 +89,16 @@ export default function SearchResultRoute() {
           >
             Load more results
           </Button>
-        </div>
+        </Stack>
       );
     }
 
-    return <div style={{
-      width: "100%",
-      textAlign: "center",
-    }}>No jokes found :(</div>;
+    const NoJokes = styled.div`
+      width: 100%;
+      text-align: center;
+    `;
+
+    return <NoJokes>No jokes found :(</NoJokes>;
   }
 
   return (

@@ -3,68 +3,70 @@ import { useState } from "react";
 import { useTheme } from "@mui/material";
 import Button from "@mui/material/Button";
 import { useNavigate } from "react-router-dom";
+import styled from "styled-components";
 
+const Container = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  padding: 1em;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  margin-bottom: 100px;
+`;
+
+const SearchBarContainer = styled.div`
+  display: flex;
+  padding: 1em;
+  gap: 1rem;
+  width: 100%;
+  max-width: 1000px;
+`;
 
 export default function Index() {
+  const [search, setSearch] = useState("");
+  const navigate = useNavigate();
 
-    const [search, setSearch] = useState("");
-    const navigate = useNavigate();
+  const theme = useTheme();
 
-    const theme = useTheme();
+  function handleSearchInput(text: string) {
+    setSearch(text);
+  }
 
-    function handleSearchInput(text : string) {
-      setSearch(text);
-      }
-      
-      function handleSubmit() {
-        navigate(`/search?term=${search}`);
-      }
+  function handleSubmit() {
+    navigate(`/search?term=${search}`);
+  }
 
-    return (
-      <div
-        style={{
-          display: "flex",
-          flexDirection: "column",
-          gap: "1em",
-          padding: "1em",
-          alignItems: "center",
-          justifyContent: "center",
-          height: "100%",
-          marginBottom: 100,
-        }}
-      >
-        <img style={{
-            width: "100%",
-            maxWidth: "200px",
-            margin: "0 auto",
-          }} src={`/my_dad_joke${theme.palette.mode === 'dark' ? '_dark' : ''}.png`} alt="Joke" />
-        <div
-        style={{
-          display: "flex",
-          padding: "1em",
-          gap: "1em",
-          width: "100%",
-          maxWidth: "1000px",
-        }}
-      >
-
-          <StyledSearchBar
-            onInputChange={(_, value) => handleSearchInput(value)}
-            onKeyPress={
-                (e) => {
-                    if (e.key === "Enter") {
-                    handleSubmit();
-                    }
-                }
+  return (
+    <Container>
+      <img
+        className="App-logo"
+        src={`/my_dad_joke${theme.palette.mode === "dark" ? "_dark" : ""}.png`}
+        alt="Joke"
+      />
+      <SearchBarContainer>
+        <StyledSearchBar
+          onInputChange={(_, value) => handleSearchInput(value)}
+          onKeyPress={(e) => {
+            if (e.key === "Enter") {
+              handleSubmit();
             }
-            placeholder="Search for a joke"
-          />
-          <Button type="submit" form="search-form" variant="outlined" onClick={handleSubmit} sx={{
+          }}
+          placeholder="Search for a joke"
+        />
+        <Button
+          type="submit"
+          form="search-form"
+          variant="outlined"
+          onClick={handleSubmit}
+          sx={{
             textWrap: "nowrap",
-          }}>
-            { search ? "Search" : "See all jokes"}
-          </Button>
-      </div>
-      </div>
-    );
+          }}
+        >
+          {search ? "Search" : "See all jokes"}
+        </Button>
+      </SearchBarContainer>
+    </Container>
+  );
 }

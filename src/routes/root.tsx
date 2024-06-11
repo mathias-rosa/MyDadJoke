@@ -58,7 +58,7 @@ export default function Root() {
                 display: "flex",
                 flexDirection: "row",
                 padding: "1.5em",
-                gap: "2em",
+                gap: "2rem",
                 alignItems: "center",
                 justifyContent: "center",
                 borderRadius: 0,
@@ -74,7 +74,13 @@ export default function Root() {
               },
             },
           },
-      
+          MuiStack: {
+            styleOverrides: {
+              root: {
+                gap: "1rem",
+              },
+            },
+          },
         },
       }),
     [prefersDarkMode],

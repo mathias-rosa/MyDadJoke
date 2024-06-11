@@ -16,11 +16,7 @@ export function Header({ isLoading , search, setSearch } : { isLoading: boolean,
     <AppBar>
         <Link to="/">
           <img
-            style={{
-              width: "100%",
-              maxWidth: "96px",
-              margin: "0 auto",
-            }}
+            className="header-logo"
             src={`/my_dad_joke${theme.palette.mode === 'dark' ? '_dark' : ''}.png`}
             alt="Joke"
           />
