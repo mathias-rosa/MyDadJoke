@@ -1,22 +1,18 @@
 import { Outlet } from "react-router-dom";
-import Box from "@mui/material/Box";
+import Stack from "@mui/material/Stack";
 
 export default function Root() {
 
   return (
 
-    <Box
+    <Stack
       sx={{
-        display: 'flex',
-        flexDirection: 'column',
         height: '100vh',
         width: '100vw',
-        boxSizing: 'border-box',
-        overflowY: 'auto',
       }}
     >
       <Outlet />
-    </Box>
+    </Stack>
 
   );
 }
